@@ -5,15 +5,16 @@
   "builders": [{
     "type": "docker",
     "image": "ubuntu:trusty",
-    "export_path": "image.tar",
+    "export_path": "{{user `service`}}.tar",
     "commit": "false"
   }],
   "provisioners": [
 
-  {
+
+    {
     "type": "file",
-    "source": "provision.sh",
-    "destination": "/opt/provision.sh"
+    "source": "../config/{{user `service`}}.yml",
+    "destination": "/opt/{{user `service`}}.yml"
   },
 
     {
@@ -31,9 +32,8 @@
       "git clone https://github.com/spinnaker/$SERVICE.git",
       "cd $SERVICE && GRADLE_USER_HOME=cache sudo ./gradlew buildDeb -x test",
       "sudo dpkg -i ./$SERVICE-web/build/distributions/*.deb",
-      "rm /opt/$SERVICE/config/f$SERVICE.yml",
-      "mv /opt/$SERVICE.yml /opt/$SERVICE/config/$SERVICE.yml",
-      "sudo /opt/$SERVICE/bin/$SERVICE &> ~/$SERVICE.log"
+      "rm /opt/$SERVICE/config/$SERVICE.yml",
+      "mv /opt/$SERVICE.yml /opt/$SERVICE/config/$SERVICE.yml"
     ],
     "environment_vars": [
       "SERVICE={{user `service`}}"
