@@ -1,0 +1,43 @@
+cassandra:
+  enabled: true
+  embedded: false
+  host: spinnaker-cassandra
+  keyspace: 'echo'
+  cluster: 'Test Cluster'
+  name: default
+
+endpoints.health.sensitive: false
+front50:
+  baseUrl: http://spinnaker-front50:8080
+hipchat:
+  enabled: false
+mail:
+  enabled: false
+orca:
+  baseUrl: http://spinnaker-orca:8083
+scheduler:
+  cron:
+    timezone: west
+  enabled: true
+  pipelineConfigsPoller:
+    enabled: true
+    pollingIntervalMs: 30000
+  threadPoolSize: 20
+  triggeringEnabled: true
+server:
+  port: 8089
+slack:
+  enabled: false
+spinnaker:
+  cassandra:
+    enabled: true
+    embedded: false
+    cluster: 'Test Cluster'
+    host: spinnaker-cassandra
+    keyspace: 'front50'
+    name: default
+spring:
+  mail:
+    host: host
+twilio:
+  enabled: false

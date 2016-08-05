@@ -1,0 +1,17 @@
+{
+  "builders": [
+    {
+      "type": "docker",
+      "image": "ubuntu:trusty",
+      "export_path": "trusty.tar"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+                  "apt-get update"
+                ]
+    }
+  ]
+}

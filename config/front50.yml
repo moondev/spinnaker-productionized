@@ -1,14 +1,36 @@
-aws:
-  defaultSimpleDBDomain: ${providers.aws.defaultSimpleDBDomain}
-  simpleDBEnabled: false
-cassandra:
-  embedded: true
-  enabled: true
 server:
   port: 8080
+
+cassandra:
+  enabled: true
+  embedded: false
+  host: spinnaker-cassandra
+  keyspace: 'front50'
+  cluster: 'Test Cluster'
+  name: default
+
 spinnaker:
-  cassanadra:
+  cassandra:
     enabled: true
-    embedded: true
-  s3:
-    enabled: false
+    embedded: false
+    cluster: 'Test Cluster'
+    host: spinnaker-cassandra
+    keyspace: 'front50'
+    name: default
+
+redis:
+  enabled: false
+
+swagger:
+  enabled: true
+  title: Spinnaker Front50 API
+  description:
+  contact:
+  patterns:
+    - /default/.*
+    - /credentials.*
+    - /global/.*
+    - /notifications.*
+    - /pipelines.*
+    - /strategies.*
+    - /v2/.*

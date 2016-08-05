@@ -1,0 +1,14 @@
+aws:
+  enabled: false
+docker:
+  bakeryDefaults:
+    targetRepository: spinnaker-registry
+  enabled: true
+google:
+  enabled: false
+redis:
+  connection: redis://spinnaker-redis:6379
+rosco:
+  configDir: /opt/rosco/config/packer
+server:
+  port: 8087

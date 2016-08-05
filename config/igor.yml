@@ -1,0 +1,25 @@
+server:
+  port: 8088
+
+jenkins:
+  enabled: true
+  masters:
+    - name: jenkins
+      address: http://spinnaker-jenkins:8080/
+      username: jenkins
+      password: jenkins
+
+travis:
+  enabled: false
+
+dockerRegistry:
+  enabled: true
+
+redis:
+  connection: redis://spinnaker-redis:6379
+
+services:
+  clouddriver:
+    baseUrl: http://spinnaker-clouddriver:7002
+  echo:
+    baseUrl: http://spinnaker-echo:8089

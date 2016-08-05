@@ -1,14 +1,48 @@
 aws:
-  defaultSimpleDBDomain: ${providers.aws.defaultSimpleDBDomain}
-  simpleDBEnabled: false
-cassandra:
-  embedded: true
+  enabled: false
+azure:
+  enabled: false
+cf:
+  accounts:
+  enabled: false
+credentials:
+  challengeDestructiveActionsEnvironments: default
+  primaryAccountTypes: default
+default:
+  account:
+    env: minikube
+
+
+
+google:
+  enabled: false
+kubernetes:
   enabled: true
+  accounts:
+    - name: my-kubernetes-account
+      dockerRegistries:
+        - accountName: dockerhub
+        - accountName: spinnaker-registry
+        - accountName: spinnaker-local
+
+dockerRegistry:
+  accounts:
+  - address: https://index.docker.io
+    name: dockerhub
+    repositories:
+    - library/nginx
+  - address: http://localhost:5000/v2
+    name: spinnaker-local
+  - address: http://spinnaker-registry:5000/v2
+    name: spinnaker-registry
+  enabled: true
+
+redis:
+  connection: redis://spinnaker-redis:6379
 server:
-  port: 8080
-spinnaker:
-  cassanadra:
-    enabled: true
-    embedded: true
-  s3:
-    enabled: false
+  port: 7002
+services:
+  front50:
+    baseUrl: http://spinnaker-front50:8080
+udf:
+  enabled: false
