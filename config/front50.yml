@@ -1,0 +1,14 @@
+aws:
+  defaultSimpleDBDomain: ${providers.aws.defaultSimpleDBDomain}
+  simpleDBEnabled: false
+cassandra:
+  embedded: true
+  enabled: true
+server:
+  port: 8080
+spinnaker:
+  cassanadra:
+    enabled: true
+    embedded: true
+  s3:
+    enabled: false
