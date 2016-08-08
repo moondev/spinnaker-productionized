@@ -4,7 +4,7 @@ provider "docker" {
 }
 
 resource "docker_container" "spin-redis" {
-  name = "spinnaker-redis"
+  name = "spin-redis"
   image = "localhost:5000/redis"       
   ports = {
     internal = 6379
@@ -13,7 +13,7 @@ resource "docker_container" "spin-redis" {
 }
 
 resource "docker_container" "cassandra" {
-  name = "spinnaker-cassandra"
+  name = "spin-cassandra"
   image = "localhost:5000/cassandra-spinnaker"       
   ports = {
     internal = 9160
@@ -21,8 +21,17 @@ resource "docker_container" "cassandra" {
   }
 }
 
+resource "docker_container" "jenkins" {
+  name = "spin-jenkins"
+  image = "localhost:5000/jenkins-dind"       
+  ports = {
+    internal = 8080
+    external = 8888
+  }
+}
+
 resource "docker_container" "spin-front50" {
-  name = "spinnaker-front50"
+  name = "spin-front50"
   image = "localhost:5000/front50"       
   ports = {
     internal = 8080
@@ -37,7 +46,7 @@ resource "docker_container" "spin-front50" {
 }
 
 resource "docker_container" "spin-clouddriver" {
-  name = "spinnaker-clouddriver"
+  name = "spin-clouddriver"
   image = "localhost:5000/clouddriver"       
   ports = {
     internal = 7002
@@ -50,3 +59,44 @@ resource "docker_container" "spin-clouddriver" {
   command = ["/opt/clouddriver/bin/clouddriver"]
 }
 
+resource "docker_container" "spin-igor" {
+  name = "spin-igor"
+  image = "localhost:5000/igor"       
+  ports = {
+    internal = 8088
+    external = 8088
+  }
+  volumes = {
+      host_path = "/Users/chadmoon/forks/spinnaker-productionized/config/igor.yml"
+      container_path = "/opt/clouddriver/config/igor.yml"
+  }
+  command = ["/opt/igor/bin/igor"]
+}
+
+resource "docker_container" "spin-rosco" {
+  name = "spin-rosco"
+  image = "localhost:5000/rosco"       
+  ports = {
+    internal = 8087
+    external = 8087
+  }
+  volumes = {
+      host_path = "/Users/chadmoon/forks/spinnaker-productionized/config/rosco.yml"
+      container_path = "/opt/rosco/config/rosco.yml"
+  }
+  command = ["/opt/rosco/bin/rosco"]
+}
+
+resource "docker_container" "spin-orca" {
+  name = "spin-orca"
+  image = "localhost:5000/orca"       
+  ports = {
+    internal = 8083
+    external = 8083
+  }
+  volumes = {
+      host_path = "/Users/chadmoon/forks/spinnaker-productionized/config/orca.yml"
+      container_path = "/opt/orca/config/orca.yml"
+  }
+  command = ["/opt/orca/bin/orca"]
+}

@@ -1,6 +1,6 @@
 bakery:
   allowMissingPackageInstallation: true
-  baseUrl: http://spinnaker-rosco:8087
+  baseUrl: http://10.20.70.102:8087
   extractBuildDetails: true
   propagateCloudProviderType: true
 default:
@@ -15,18 +15,18 @@ echo:
 flex:
   baseUrl: http://not-a-host
 front50:
-  baseUrl: http://spinnaker-front50:8080
+  baseUrl: http://10.20.70.102:8080
 igor:
   enabled: true
-  baseUrl: http://spinnaker-igor:8088
+  baseUrl: http://10.20.70.102:8088
 kato:
-  baseUrl: http://spinnaker-clouddriver:7002
+  baseUrl: http://10.20.70.102:7002
 mort:
-  baseUrl: http://spinnaker-clouddriver:7002
+  baseUrl: http://10.20.70.102:7002
 oort:
-  baseUrl: http://spinnaker-clouddriver:7002
+  baseUrl: http://10.20.70.102:7002
 redis:
-  connection: redis://spinnaker-redis:6379
+  connection: redis://10.20.70.102:6379
 server:
   port: 8083
 services:

@@ -5,7 +5,7 @@ jenkins:
   enabled: true
   masters:
     - name: jenkins
-      address: http://spinnaker-jenkins:8080/
+      address: http://10.20.70.102:8888/
       username: jenkins
       password: jenkins
 
@@ -16,10 +16,10 @@ dockerRegistry:
   enabled: true
 
 redis:
-  connection: redis://spinnaker-redis:6379
+  connection: redis://10.20.70.102:6379
 
 services:
   clouddriver:
-    baseUrl: http://spinnaker-clouddriver:7002
+    baseUrl: http://10.20.70.102:7002
   echo:
-    baseUrl: http://spinnaker-echo:8089
+    baseUrl: http://10.20.70.102:8089
