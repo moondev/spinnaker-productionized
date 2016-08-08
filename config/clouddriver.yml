@@ -17,32 +17,17 @@ default:
 google:
   enabled: false
 kubernetes:
-  enabled: true
-  accounts:
-    - name: my-kubernetes-account
-      dockerRegistries:
-        - accountName: dockerhub
-        - accountName: spinnaker-registry
-        - accountName: spinnaker-local
+  enabled: false
 
 dockerRegistry:
-  accounts:
-  - address: https://index.docker.io
-    name: dockerhub
-    repositories:
-    - library/nginx
-  - address: http://localhost:5000/v2
-    name: spinnaker-local
-  - address: http://spinnaker-registry:5000/v2
-    name: spinnaker-registry
-  enabled: true
+  enabled: false
 
 redis:
-  connection: redis://spinnaker-redis:6379
+  connection: redis://10.20.70.102:6379
 server:
   port: 7002
 services:
   front50:
-    baseUrl: http://spinnaker-front50:8080
+    baseUrl: http://10.20.70.102:8080
 udf:
   enabled: false

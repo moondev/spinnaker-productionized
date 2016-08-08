@@ -4,10 +4,21 @@
   },
   "builders": [{
     "type": "docker",
-    "image": "ubuntu:trusty",
-    "export_path": "{{user `service`}}.tar",
-    "commit": "false"
+    "image": "ubuntu:trusty", 
+    "commit": "true"
   }],
+
+"post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "localhost:5000/spinnaker-base",
+        "tag": "latest"
+      },
+      "docker-push"
+    ]
+  ],
+
   "provisioners": [
 
 
@@ -32,18 +43,9 @@
       "SERVICE={{user `service`}}"
     ]
   }
-  ],
-
-  "post-processors": [
-    [
-      {
-        "type": "docker-tag",
-        "repository": "localhost:5000/spinnaker-base",
-        "tag": "latest"
-      },
-      "docker-push"
-    ]
   ]
+
+  
 
 
 }

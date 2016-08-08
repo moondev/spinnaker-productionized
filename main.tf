@@ -3,53 +3,50 @@ provider "docker" {
     host = "unix:///var/run/docker.sock"
 }
 
-resource "docker_image" "ubuntu" {
-    name = "ubuntu:trusty"
+resource "docker_container" "spin-redis" {
+  name = "spinnaker-redis"
+  image = "localhost:5000/redis"       
+  ports = {
+    internal = 6379
+    external = 6379
+  }
+}
+
+resource "docker_container" "cassandra" {
+  name = "spinnaker-cassandra"
+  image = "localhost:5000/cassandra-spinnaker"       
+  ports = {
+    internal = 9160
+    external = 9160
+  }
 }
 
 resource "docker_container" "spin-front50" {
-  name = "spin-front50"
-  image = "${docker_image.ubuntu.latest}"
-  command = ["ping", "localhost"]        
+  name = "spinnaker-front50"
+  image = "localhost:5000/front50"       
   ports = {
     internal = 8080
     external = 8080
   }
+  volumes = {
+      host_path = "/Users/chadmoon/forks/spinnaker-productionized/config/front50.yml"
+      container_path = "/opt/front50/config/front50.yml"
+  }
 
-
+  command = ["/opt/front50/bin/front50"]
 }
 
-// resource "docker_container" "spinnaker-front50" {
-//     image = "${docker_image.ubuntu.latest}"
-//     name = "front50"
-//     command = ["ping", "localhost"]        
-//     ports = {
-//       internal = 8080
-//       external = 8080
-//     }
+resource "docker_container" "spin-clouddriver" {
+  name = "spinnaker-clouddriver"
+  image = "localhost:5000/clouddriver"       
+  ports = {
+    internal = 7002
+    external = 7002
+  }
+  volumes = {
+      host_path = "/Users/chadmoon/forks/spinnaker-productionized/config/clouddriver.yml"
+      container_path = "/opt/clouddriver/config/clouddriver.yml"
+  }
+  command = ["/opt/clouddriver/bin/clouddriver"]
+}
 
-//   provisioner "local-exec" {
-//     inline = [
-//       "uptime"
-//     ]
-//   }
-
-//   provisioner "remote-exec" {
-    // inline = [
-    //   "export DEBIAN_FRONTEND=noninteractive",
-    //   "sudo apt-get update",
-    //   "sudo apt-get install -y git",
-    //   "git",
-    //   "sudo add-apt-repository -y ppa:webupd8team/java",
-    //   "echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections",
-    //   "sudo apt-get update",
-    //   "sudo apt-get install -y oracle-java8-installer",
-    //   "git clone https://github.com/spinnaker/front50.git",
-    //   "cd front50 && GRADLE_USER_HOME=cache sudo ./gradlew buildDeb -x test",
-    //   "sudo dpkg -i ./front50-web/build/distributions/*.deb",
-    //   "rm /opt/front50/config/front50.yml",
-    //   "mv /opt/front50.yml /opt/front50/config/front50.yml",
-    //   "sudo /opt/front50/bin/front50 &> ~/front50.log"
-//     ]
-//   }
-// }

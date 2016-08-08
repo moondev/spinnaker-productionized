@@ -5,9 +5,20 @@
   "builders": [{
     "type": "docker",
     "image": "localhost:5000/spinnaker-base",
-    "export_path": "{{user `service`}}.tar",
-    "commit": "false"
+    "commit": "true"
   }],
+
+ "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "localhost:5000/{{user `service`}}",
+        "tag": "latest"
+      },
+      "docker-push"
+    ]
+  ],
+
   "provisioners": [
 
 
@@ -30,18 +41,9 @@
       "SERVICE={{user `service`}}"
     ]
   }
-  ],
-
-  "post-processors": [
-    [
-      {
-        "type": "docker-tag",
-        "repository": "localhost:5000/{{user `service`}}",
-        "tag": "latest"
-      },
-      "docker-push"
-    ]
   ]
+
+ 
 
 
 }
