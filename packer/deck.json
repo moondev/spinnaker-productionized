@@ -4,7 +4,7 @@
   },
   "builders": [{
     "type": "docker",
-    "image": "chadmoon/spinnaker-nginx:latest", 
+    "image": "ubuntu:trusty", 
     "commit": "true"
   }],
 
@@ -12,7 +12,7 @@
     [
       {
         "type": "docker-tag",
-        "repository": "localhost:5000/spinnaker-deck",
+        "repository": "localhost:5000/deck",
         "tag": "latest"
       },
       "docker-push"
@@ -26,13 +26,30 @@
     {
       "type": "shell",
     "inline": [
-      "export DEBIAN_FRONTEND=noninteractive",
+      "export CI=true",
+      "export AUTH=disabled",
+      "export API_HOST=/gate",
       "sudo apt-get update",
       "sudo apt-get install -y git",
       "sudo apt-get install -y curl",
       "sudo apt-get install -y software-properties-common python-software-properties",
-      "curl -sL https://deb.nodesource.com/setup_6.x | bash -",
-      "apt-get install -y nodejs"
+      "sudo apt-get install -y make",
+      "sudo apt-get install -y nginx",
+      "sudo apt-get install -y build-essential g++",
+      "curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -",
+      "apt-get install -y nodejs",
+      "sudo apt-get install -y nodejs",
+      "cd ~",
+      "git clone https://github.com/spinnaker/deck.git",
+      "cd deck",
+      "echo '{ \"allow_root\": true }' > /root/deck/.bowerrc",
+      "echo '{ \"allow_root\": true }' > /root/.bowerrc",
+      "cat /root/.bowerrc",
+      "npm install -g bower@1.4.1",
+      "npm install",
+      "npm run build",
+      "sudo rm /usr/share/nginx/html",
+      "mv build/webpack /usr/share/nginx/html"
     ],
     "environment_vars": [
       "SERVICE={{user `service`}}"

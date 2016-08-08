@@ -1,6 +1,16 @@
 
 provider "docker" {
-    host = "unix:///var/run/docker.sock"
+
+}
+
+resource "null_resource" "cluster" {
+
+  provisioner "local-exec" {
+    # Bootstrap script called with private_ip of each node in the clutser
+    inline = [
+      "python packer/bake.py"
+    ]
+  }
 }
 
 resource "docker_container" "spin-redis" {
@@ -99,4 +109,24 @@ resource "docker_container" "spin-orca" {
       container_path = "/opt/orca/config/orca.yml"
   }
   command = ["/opt/orca/bin/orca"]
+}
+
+resource "docker_container" "spin-deck" {
+  name = "deck"
+  image = "localhost:5000/deck"       
+  ports = {
+    internal = 80
+    external = 9000
+  }
+  volumes = [
+  {
+      host_path = "/Users/chadmoon/forks/spinnaker-productionized/config/settings.js"
+      container_path = "/usr/share/nginx/settings.js"
+  },
+  {
+      host_path = "/Users/chadmoon/forks/spinnaker-productionized/config/nginx.conf"
+      container_path = "/etc/nginx/nginx.conf"
+  }
+  ]
+  command = ["nginx -g 'daemon off;'"]
 }
