@@ -1,0 +1,46 @@
+{
+  "variables": {
+    "service": "deck"
+  },
+  "builders": [{
+    "type": "docker",
+    "image": "chadmoon/spinnaker-nginx:latest", 
+    "commit": "true"
+  }],
+
+"post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "localhost:5000/spinnaker-deck",
+        "tag": "latest"
+      },
+      "docker-push"
+    ]
+  ],
+
+  "provisioners": [
+
+
+
+    {
+      "type": "shell",
+    "inline": [
+      "export DEBIAN_FRONTEND=noninteractive",
+      "sudo apt-get update",
+      "sudo apt-get install -y git",
+      "sudo apt-get install -y curl",
+      "sudo apt-get install -y software-properties-common python-software-properties",
+      "curl -sL https://deb.nodesource.com/setup_6.x | bash -",
+      "apt-get install -y nodejs"
+    ],
+    "environment_vars": [
+      "SERVICE={{user `service`}}"
+    ]
+  }
+  ]
+
+  
+
+
+}
