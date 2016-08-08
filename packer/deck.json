@@ -48,7 +48,7 @@
       "npm install -g bower@1.4.1",
       "npm install",
       "npm run build",
-      "sudo rm /usr/share/nginx/html",
+      "sudo rm -rf /usr/share/nginx/html",
       "mv build/webpack /usr/share/nginx/html"
     ],
     "environment_vars": [
