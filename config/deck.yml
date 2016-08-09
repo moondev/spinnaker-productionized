@@ -38,11 +38,11 @@ dockerRegistry:
   enabled: true
 
 redis:
-  connection: redis://spinnaker-redis:6379
+  connection: redis://spin-redis:6379
 server:
   port: 7002
 services:
   front50:
-    baseUrl: http://spinnaker-front50:8080
+    baseUrl: http://spin-front50:8080
 udf:
   enabled: false

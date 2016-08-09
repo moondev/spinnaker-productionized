@@ -1,19 +1,19 @@
 redis:
-  connection: redis://${IP}:6379
+  connection: redis://spin-redis:6379
 server:
   port: 8084
 services:
   clouddriver:
-    baseUrl: http://${IP}:7002
+    baseUrl: http://spin-clouddriver:7002
   deck:
-    baseUrl: http://${IP}:9000
+    baseUrl: http://localhost:9000
   front50:
-    baseUrl: http://${IP}:8080
+    baseUrl: http://spin-front50:8080
   orca:
-    baseUrl: http://${IP}:8083
+    baseUrl: http://spin-orca:8083
   igor:
     enabled: true
-    baseUrl: http://${IP}:8088
+    baseUrl: http://spin-igor:8088
   rosco:
     enabled: true
-    baseUrl: http://${IP}:8087
+    baseUrl: http://spin-rosco:8087

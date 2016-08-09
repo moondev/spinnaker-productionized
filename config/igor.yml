@@ -5,7 +5,7 @@ jenkins:
   enabled: true
   masters:
     - name: jenkins
-      address: http://${IP}:8888/
+      address: http://spin-jenkins:8888/
       username: jenkins
       password: jenkins
 
@@ -16,10 +16,10 @@ dockerRegistry:
   enabled: true
 
 redis:
-  connection: redis://${IP}:6379
+  connection: redis://spin-redis:6379
 
 services:
   clouddriver:
-    baseUrl: http://${IP}:7002
+    baseUrl: http://spin-clouddriver:7002
   echo:
-    baseUrl: http://${IP}:8089
+    baseUrl: http://spin-echo:8089

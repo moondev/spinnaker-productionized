@@ -1,6 +1,6 @@
 bakery:
   allowMissingPackageInstallation: true
-  baseUrl: http://${IP}:8087
+  baseUrl: http://spin-rosco:8087
   extractBuildDetails: true
   propagateCloudProviderType: true
 default:
@@ -15,18 +15,18 @@ echo:
 flex:
   baseUrl: http://not-a-host
 front50:
-  baseUrl: http://${IP}:8080
+  baseUrl: http://spin-front50:8080
 igor:
   enabled: true
-  baseUrl: http://${IP}:8088
+  baseUrl: http://spin-igor:8088
 kato:
-  baseUrl: http://${IP}:7002
+  baseUrl: http://spin-clouddriver:7002
 mort:
-  baseUrl: http://${IP}:7002
+  baseUrl: http://spin-clouddriver:7002
 oort:
-  baseUrl: http://${IP}:7002
+  baseUrl: http://spin-clouddriver:7002
 redis:
-  connection: redis://${IP}:6379
+  connection: redis://spin-redis:6379
 server:
   port: 8083
 services:
