@@ -3,10 +3,14 @@ provider "docker" {
 
 }
 
-resource "null_resource" "cluster" {
-
-  provisioner "local-exec" {
-    # Bootstrap script called with private_ip of each node in the clutser
+resource "docker_container" "spin-registry" {
+  name = "spin-registry"
+  image = "registry:5000"       
+  ports = {
+    internal = 5000
+    external = 5000
+  }
+  provisioner "local-exec" {r
     inline = [
       "python packer/bake.py"
     ]
