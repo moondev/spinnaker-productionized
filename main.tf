@@ -10,11 +10,7 @@ resource "docker_container" "spin-registry" {
     internal = 5000
     external = 5000
   }
-  provisioner "local-exec" {r
-    inline = [
-      "python packer/bake.py"
-    ]
-  }
+#provisioner "local-exec" {command = "python packer/bake.py"}
 }
 
 resource "docker_container" "spin-redis" {
