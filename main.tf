@@ -3,16 +3,6 @@ provider "docker" {
 
 }
 
-resource "docker_container" "spin-registry" {
-  name = "spin-registry"
-  image = "registry:5000"       
-  ports = {
-    internal = 5000
-    external = 5000
-  }
-#provisioner "local-exec" {command = "python packer/bake.py"}
-}
-
 resource "docker_container" "spin-redis" {
   name = "spin-redis"
   image = "localhost:5000/redis"       
@@ -112,7 +102,7 @@ resource "docker_container" "spin-orca" {
 }
 
 resource "docker_container" "spin-deck" {
-  name = "deck"
+  name = "spin-deck"
   image = "localhost:5000/deck"       
   ports = {
     internal = 80
@@ -128,5 +118,5 @@ resource "docker_container" "spin-deck" {
       container_path = "/etc/nginx/nginx.conf"
   }
   ]
-  command = ["nginx -g 'daemon off;'"]
+  command = ["nginx", "-g", "daemon off;"]
 }
