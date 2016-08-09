@@ -7,7 +7,7 @@ docker:
 google:
   enabled: false
 redis:
-  connection: redis://spinnaker-redis:6379
+  connection: redis://${IP}:6379
 rosco:
   configDir: /opt/rosco/config/packer
 server:

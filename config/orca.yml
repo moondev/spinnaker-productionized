@@ -1,6 +1,6 @@
 bakery:
   allowMissingPackageInstallation: true
-  baseUrl: http://10.20.70.102:8087
+  baseUrl: http://${IP}:8087
   extractBuildDetails: true
   propagateCloudProviderType: true
 default:
@@ -15,18 +15,18 @@ echo:
 flex:
   baseUrl: http://not-a-host
 front50:
-  baseUrl: http://10.20.70.102:8080
+  baseUrl: http://${IP}:8080
 igor:
   enabled: true
-  baseUrl: http://10.20.70.102:8088
+  baseUrl: http://${IP}:8088
 kato:
-  baseUrl: http://10.20.70.102:7002
+  baseUrl: http://${IP}:7002
 mort:
-  baseUrl: http://10.20.70.102:7002
+  baseUrl: http://${IP}:7002
 oort:
-  baseUrl: http://10.20.70.102:7002
+  baseUrl: http://${IP}:7002
 redis:
-  connection: redis://10.20.70.102:6379
+  connection: redis://${IP}:6379
 server:
   port: 8083
 services:

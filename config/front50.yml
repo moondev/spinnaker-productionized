@@ -4,7 +4,7 @@ server:
 cassandra:
   enabled: true
   embedded: false
-  host: 10.20.70.102
+  host: ${IP}
   keyspace: 'front50'
   cluster: 'Test Cluster'
   name: default
@@ -14,7 +14,7 @@ spinnaker:
     enabled: true
     embedded: false
     cluster: 'Test Cluster'
-    host: 10.20.70.102
+    host: ${IP}
     keyspace: 'front50'
     name: default
 

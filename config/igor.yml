@@ -5,7 +5,7 @@ jenkins:
   enabled: true
   masters:
     - name: jenkins
-      address: http://10.20.70.102:8888/
+      address: http://${IP}:8888/
       username: jenkins
       password: jenkins
 
@@ -16,10 +16,10 @@ dockerRegistry:
   enabled: true
 
 redis:
-  connection: redis://10.20.70.102:6379
+  connection: redis://${IP}:6379
 
 services:
   clouddriver:
-    baseUrl: http://10.20.70.102:7002
+    baseUrl: http://${IP}:7002
   echo:
-    baseUrl: http://10.20.70.102:8089
+    baseUrl: http://${IP}:8089

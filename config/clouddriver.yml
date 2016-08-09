@@ -23,11 +23,11 @@ dockerRegistry:
   enabled: false
 
 redis:
-  connection: redis://10.20.70.102:6379
+  connection: redis://${IP}:6379
 server:
   port: 7002
 services:
   front50:
-    baseUrl: http://10.20.70.102:8080
+    baseUrl: http://${IP}:8080
 udf:
   enabled: false
